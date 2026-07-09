@@ -5,6 +5,15 @@
 
 ---
 
+
+## 致谢
+
+由衷感谢 **Mahmood T.** 博士（APFA-Net 原作者），他在本项目过程中耐心解答了模型结构、两阶段训练策略等多个关键技术问题，给予了非常大的帮助。
+
+> Mahmood T, Choi J, Park K R. *Artificial intelligence-based classification of pollen grains using attention-guided pollen features aggregation network.* Journal of King Saud University - Computer and Information Sciences, 2023, 35: 740-756.
+
+---
+
 ## 目录结构
 
 ```
