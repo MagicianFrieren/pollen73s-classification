@@ -1,0 +1,102 @@
+﻿# POLLEN73S 花粉识别 — APFA-Net Wide 开发日志
+
+## 项目信息
+- 课程：本科生课程设计（小组项目）
+- 任务：多模型花粉粒识别（POLLEN73S，73类，2523张图像）
+- 本人负责：APFA-Net Wide 模型训练 + Gradio 网站部署
+- 硬件：NVIDIA RTX 4050 Laptop (6GB VRAM)，CUDA 12.1，PyTorch 2.2.0
+
+---
+
+## v1.0 — APFA-Net Wide 模型搭建与两阶段训练
+
+### 1.1 模型搭建
+- 基于 APFA（Asymmetric Pyramid Feature Aggregation）论文实现 Wide 版本
+- 在基础 APFA (1.88M) 基础上扩展通道数：base_channels 1→2 (32→64)
+- Wide 版总参数 2.92M，输入 224×224，输出 73 类
+- Depth-wise 注意力机制嵌入在每个 CG 模块中，保持轻量化
+
+### 1.2 两阶段训练
+- 阶段一（S1）：AIpollen 数据集（36 类，~800 张）预训练 100 epoch
+- 阶段二（S2）：POLLEN73S（73 类，2523 张）微调 100 epoch
+- 损失函数：CrossEntropyLoss
+- 优化器：Adam，S1 lr=0.001，S2 lr=0.0003
+- S1 结果：Acc=62.50%，F1=56.80%
+- S2 结果：Acc=91.56%，F1=91.52%
+- 总训练耗时：S1 (89min) + S2 (110min) ≈ 199min
+- 来源：outputs/apfanet_wide_results.json
+
+### 1.3 直接训练对比（消融）
+- 去掉阶段一预训练，直接在 POLLEN73S 上训练
+- 结果：Acc=91.03%，F1=90.60%
+- 两阶段提升：+0.53% Acc，+0.92% F1
+- 来源：outputs/apfanet_wide_direct_results.json
+
+---
+
+## v1.1 — Bayesian Focal Loss 集成
+
+### 2.1 BFL 实现
+- 参考论文 "Bayesian Focal Loss for Imbalanced Medical Image Classification"
+- 在 Focal Loss 基础上引入贝叶斯不确定性建模
+- 公式：BFL = precision * FL + log_var（precision = exp(-log_var)）
+- 实现为 BayesianFocalLoss 类，内联于 train_apfanet.py
+- 全局 log_var（标量），通过 exp(-log_var) 自动学习不确定性权重
+
+### 2.2 BFL 训练
+- 首次训练：Acc=88.39%，F1=88.32%（outputs/apfanet_wide_bfl_results.json 初版）
+- 问题：发现 log_var 参数未被优化器正确更新
+- 原因：log_var 通过 nn.Parameter 定义但未通过 model.parameters() 传入优化器
+- 修复：将 BFL 的 log_var 单独传入 optimizer param groups
+
+### 2.3 BFL 修复后重训
+- 结果：Acc=87.34%，F1=85.70%
+- CE 对比：91.56% → 87.34%（-4.22%），BFL 为负提升
+- Per-Parameter BFL (PBFL) 也测试了：Acc=85.22%，F1=83.84%
+- 来源：outputs/apfanet_wide_bfl_results.json（修复版）、outputs/apfanet_wide_pbfl_results.json
+
+### 2.4 BFL 效果分析
+- BFL 在 APFA-Wide 上表现不如 CE，可能原因：
+  - BFL 原论文针对医学图像极不平衡分类（二分类/少类），POLLEN73S 类别较均衡
+  - gamma=2.0 的 Focal Loss 部分过度压制易分类样本
+  - 贝叶斯不确定性在 73 类任务中学习困难
+- 训练耗时：BFL (40min) 比 CE (110min) 短，因为早停触发更早
+
+---
+
+## v1.2 — Gradio 网站部署
+
+### 3.1 功能实现
+- 框架：Gradio
+- 部署平台：ModelScope
+- 入口文件：ms_push/app.py
+
+### 3.2 核心功能
+- 图片上传 + 实时预测（Top-3 概率 + 花粉种类信息）
+- 支持四个模型切换：ResNet34-SE、APFA-Wide、ViT-Small、APFA-基础
+- 预处理流程展示（用户上传 → Resize → 归一化 → 模型推理）
+- 模型性能对比表（参数量、推理时间）
+- 中英文双语界面切换
+
+### 3.3 迭代修复
+- Top-3 预测奖牌图标显示修复（1st 奖牌缺失）
+- 花粉 Species Info 统一问题修复（所有结果显示相同文字）
+- 预处理流程可视化面板添加
+- UI 布局优化（上传框缩小，预处理预览放大）
+
+---
+
+## v1.3 — 文档与提交
+
+### 4.1 报告/PPT
+- 协助撰写 APFA 模型结构描述、四模型性能对比
+- 绘制 APFA-Wide 模型结构图（PPT 手绘）
+- 两阶段消融实验图表（柱形图）
+- BFL vs CE 数学公式对比
+
+### 4.2 最终提交
+- 上交/ 目录：源码 + 网站 + 开发日志 + README
+- 注释比例 ≥ 1:1（中文注释）
+- BFL 类已从 train.py 合并至 train_apfanet.py
+- 不含模型权重文件（按组长要求）
+- 不含个人信息（已隐私扫描）

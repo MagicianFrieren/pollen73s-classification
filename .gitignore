@@ -1,0 +1,64 @@
+﻿# === 模型权重 ===
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.safetensors
+*.h5
+*.pb
+*.onnx
+outputs/weights/
+backup_models/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# === 数据集 ===
+POLLEN73S/
+POLLEN23E/
+AIpollen-master/
+datasets/
+
+# === 图片 ===
+*.TIF
+*.tif
+*.jpg
+*.jpeg
+*.png
+*.bmp
+
+# === 系统 ===
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === 环境 ===
+.env
+.venv/
+venv/
+
+# === 历史目录（非正式部署） ===
+deploy/
+ms_deploy/
+webapp/
+deploy_backup/
+archive/
+txt_files/
+vit/
+
+# === 开发日志中不需要的 ===
+*.docx
+*.pdf
