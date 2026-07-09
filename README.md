@@ -1,16 +1,28 @@
 ﻿# 花粉识别 — APFA-Net & 网站部署
 
-> 本科课程设计 小组项目  
-> 本人负责部分：APFA-Net 模型训练 + 网站部署
+> **华中科技大学（HUST）模式识别课程设计 · 小组项目**  
+> 本人负责：APFA-Net 模型训练（两阶段迁移学习 + Bayesian Focal Loss）+ Gradio 网站部署  
+> 本项目在 Mahmood T. 博士的热心帮助下完成，希望也能对你有所帮助。
+
+**Pollen Grain Classification — APFA-Net & Web Deployment**  
+> *HUST Pattern Recognition Course Project (Group)*  
+> *My role: APFA-Net model training (two-stage transfer learning + Bayesian Focal Loss) + Gradio web deployment*  
+> *This project was completed with the generous help of Dr. Mahmood T. Hope it helps you too.*
 
 ---
 
 
-## 致谢
+## 致谢 / Acknowledgments
 
-由衷感谢 **Mahmood T.** 博士（APFA-Net 原作者），他在本项目过程中耐心解答了模型结构、两阶段训练策略等多个关键技术问题，给予了非常大的帮助。
+当初只是抱着试一试的想法，向 APFA-Net 论文的第一作者兼通讯作者 **Mahmood T.** 博士发去了一封请教问题的邮件——没想到很快就收到了他本人的亲自回复。他在后续多封邮件中耐心解答了模型结构设计、两阶段训练策略等一系列关键问题，对本项目的推进起到了不可替代的作用。这份来自素未谋面的研究者的无私帮助，让我深受触动。
 
-> Mahmood T, Choi J, Park K R. *Artificial intelligence-based classification of pollen grains using attention-guided pollen features aggregation network.* Journal of King Saud University - Computer and Information Sciences, 2023, 35: 740-756.
+正是因为得到了这样的帮助，我才想把这份代码和经验整理开放出来。希望这个仓库对正在学习深度学习、做类似课设的你，也能有一点帮助。
+
+---
+
+*I reached out to **Dr. Mahmood T.**, the first and corresponding author of the APFA-Net paper, with little expectation of a reply — yet he responded personally, and quickly. Over several email exchanges, he patiently answered questions on model architecture, two-stage training strategies, and more. His selfless guidance was instrumental to this project, and I was deeply moved that a researcher I had never met would offer such generous help.*
+
+*It is precisely because of this experience that I want to share this code and what I learned along the way. If you are studying deep learning or working on a similar course project, I hope this repository helps you too.*
 
 ---
 
