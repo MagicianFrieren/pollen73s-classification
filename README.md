@@ -157,9 +157,27 @@ python app.py
 
 - Python 3.12，PyTorch 2.2.0+ CUDA 12.1
 - GPU：NVIDIA RTX 4050 Laptop 6GB VRAM（或相当配置）
-- 数据集放在项目根目录：
-  - `POLLEN73S/` — 73 类花粉，每类一个子目录
-  - `AIpollen-master/datasets/` — 36 类花粉预训练数据
+
+### 数据集下载 / Dataset Download
+
+本项目使用两个公开数据集，请按以下链接获取：
+
+1. **POLLEN73S**（73 类花粉，2523 张图像）  
+   → APFA-Net 官方仓库：[github.com/tahirjhan/Multi-Class-Pollen-Grain-Classification](https://github.com/tahirjhan/Multi-Class-Pollen-Grain-Classification)  
+   → 原始论文：Astolfi et al., *POLLEN73S: An Image Dataset for Pollen Grains Classification*, 2020
+
+2. **AIpollen**（36 类花粉，预训练用）  
+   → 官方仓库：[github.com/fish-flyer/AIpollen](https://github.com/fish-flyer/AIpollen)  
+   → 原始论文：Plants 2024, 13, 3118. [DOI: 10.3390/plants13223118](https://doi.org/10.3390/plants13223118)
+
+> ⚠️ **使用声明 / Usage Notice**  
+> 以上数据集仅限学术研究与学习目的使用，严禁用于任何商业用途。数据集版权归原作者所有。  
+> *These datasets are provided for academic research and educational purposes only. Any commercial use is strictly prohibited. All copyrights belong to the original authors.*
+
+下载后将数据集放置于项目根目录：
+- `POLLEN73S/` — 73 类花粉，每类一个子目录
+- `AIpollen-master/datasets/` — 36 类花粉预训练数据
+
 
 ### 步骤
 
