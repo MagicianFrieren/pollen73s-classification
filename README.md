@@ -14,13 +14,13 @@
 
 ## 致谢 / Acknowledgments
 
-当初只是抱着试一试的想法，向 APFA-Net 论文的**Mahmood T.** 博士发去了一封请教问题的邮件——没想到很快就收到了他本人的亲自回复。他在后续多封邮件中耐心解答了模型结构设计、两阶段训练策略等一系列关键问题，对本项目的推进起到了不可替代的作用。这份来自素未谋面的研究者的无私帮助，让我深受触动。
+当初只是抱着试一试的想法，向 APFA-Net 论文的**Mahmood T.** 博士发去了一封请教问题的邮件——没想到很快就收到了他本人的亲自回复。他在回复中慷慨分享了宝贵的参考资料，对本项目的实现给予了关键启发。这份来自素未谋面的研究者的无私帮助，让我深受触动。
 
 正是因为得到了这样的帮助，我才想把这份代码和经验整理开放出来。希望这个仓库对正在学习深度学习、做类似课设的你，也能有一点帮助。
 
 ---
 
-*I reached out to **Dr. Mahmood T.**, the APFA-Net paper, with little expectation of a reply — yet he responded personally, and quickly. Over several email exchanges, he patiently answered questions on model architecture, two-stage training strategies, and more. His selfless guidance was instrumental to this project, and I was deeply moved that a researcher I had never met would offer such generous help.*
+*I reached out to **Dr. Mahmood T.**, the APFA-Net paper, with little expectation of a reply — yet he responded personally, and quickly. He generously shared invaluable reference materials that provided key inspiration for this project, and I was deeply moved that a researcher I had never met would offer such generous help.*
 
 *It is precisely because of this experience that I want to share this code and what I learned along the way. If you are studying deep learning or working on a similar course project, I hope this repository helps you too.*
 
